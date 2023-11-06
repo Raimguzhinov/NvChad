@@ -39,6 +39,40 @@
 
 - NvChad isn't a framework! It's supposed to be used as a "base" config, so users can tweak the defaults well, and also remove the things they don't like in the default config and build their config on top of it. Users can tweak the entire default config while staying in their custom config (lua/custom dir). This is the control center of the user's config and gitignored so the users can stay up-to-date with NvChad's latest config (main branch) while still controlling it with their chadrc (file that controls entire custom dir).
 
+## 🛠️ Installation
+
+### Linux/Mac OS (Unix)
+
+#### Make a backup of your current nvim and shared folder
+
+```shell
+mv ~/.config/nvim ~/.config/nvim.bak
+mv ~/.local/share/nvim ~/.local/share/nvim.bak
+```
+
+#### Clone the repository
+
+```shell
+git clone --depth 1 https://github.com/Raimguzhinov/NvChad ~/.config/nvim
+nvim
+```
+
+### Windows (Powershell)
+
+#### Make a backup of your current nvim and nvim-data folder
+
+```pwsh
+Rename-Item -Path $env:LOCALAPPDATA\nvim -NewName $env:LOCALAPPDATA\nvim.bak
+Rename-Item -Path $env:LOCALAPPDATA\nvim-data -NewName $env:LOCALAPPDATA\nvim-data.bak
+```
+
+#### Clone the repository
+
+```pwsh
+git clone --depth 1 https://github.com/Raimguzhinov/NvChad $env:LOCALAPPDATA\nvim
+nvim
+```
+
 ## Theme Showcase
 
 <details><summary> <b>Images (Click to expand!)</b></summary>
