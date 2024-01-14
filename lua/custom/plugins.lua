@@ -68,20 +68,20 @@ local plugins = {
     },
   },
   {
-  "kelly-lin/ranger.nvim",
-  config = function()
-    require("ranger-nvim").setup({
-  enable_cmds = false,
-  replace_netrw = false,
-  ui = {
-    border = "none",
-    height = 1,
-    width = 1,
-    x = 0.5,
-    y = 0.5,
-  }
-  })
-  end,
+    "kelly-lin/ranger.nvim",
+    config = function()
+      require("ranger-nvim").setup({
+        enable_cmds = true,
+        replace_netrw = false,
+        ui = {
+          border = "none",
+          height = 1,
+          width = 1,
+          x = 0.5,
+          y = 0.5,
+        }
+      })
+    end,
   },
   {
     "christoomey/vim-tmux-navigator",
@@ -89,9 +89,9 @@ local plugins = {
   },
   {
     "liaozixin/nvim-cpptools",
-    -- config = function()
-    --   require("nvim-cpptools").setup()
-    -- end
+    config = function()
+      require("nvim-cpptools").setup()
+    end
   },
   {
     "iamcco/markdown-preview.nvim",
@@ -103,7 +103,7 @@ local plugins = {
     "jackMort/ChatGPT.nvim",
     event = "VeryLazy",
     config = function()
-      require("chatgpt").setup {}
+      require("chatgpt").setup()
     end,
     dependencies = {
       "MunifTanjim/nui.nvim",
@@ -208,8 +208,8 @@ local plugins = {
   },
   {
     "jose-elias-alvarez/null-ls.nvim",
-    event = "VeryLazy",
-    ft = {"python"},
+    -- event = "VeryLazy",
+    ft = {"cpp", "go", "python"},
     opts = function()
       return require "custom.configs.null-ls"
     end,
@@ -278,7 +278,7 @@ local plugins = {
         cmake_regenerate_on_save = true, -- auto generate when save CMakeLists.txt
         cmake_generate_options = { "-DCMAKE_EXPORT_COMPILE_COMMANDS=1" }, -- this will be passed when invoke `CMakeGenerate`
         cmake_build_options = {}, -- this will be passed when invoke `CMakeBuild`
-        cmake_build_directory = "", -- this is used to specify generate directory for cmake
+        cmake_build_directory = "build", -- this is used to specify generate directory for cmake
         cmake_build_directory_prefix = "cmake_build_", -- when cmake_build_directory is set to "", this option will be activated
         cmake_soft_link_compile_commands = true, -- this will automatically make a soft link from compile commands file to project root dir
         cmake_compile_commands_from_lsp = false, -- this will automatically set compile commands file location using lsp, to use it, please set `cmake_soft_link_compile_commands` to false
@@ -782,24 +782,11 @@ local plugins = {
       require('vgit').setup()
     end
   },
-  -- {
-  --   "hrsh7th/nvim-cmp",
-  --   opts = function()
-  --     local M = require "plugins.configs.cmp"
-  --     M.completion.completeopt = "menu,menuone,noselect"
-  --     M.mapping["<CR>"] = cmp.mapping.confirm {
-  --       behavior = cmp.ConfirmBehavior.Insert,
-  --       select = false,
-  --     }
-  --     table.insert(M.sources, {name = "crates"})
-  --     return M
-  --   end,
-  -- },
   {
     "williamboman/mason.nvim",
     opts = {
       ensure_installed = {
-        -- "clangd",
+        "clangd",
         "clang-format",
         "codelldb",
         "black",
@@ -809,6 +796,7 @@ local plugins = {
         "pyright",
         "rust-analyzer",
         "cpptools",
+        "gopls",
       }
     }
   }
