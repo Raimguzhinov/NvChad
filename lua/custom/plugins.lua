@@ -51,19 +51,20 @@ local plugins = {
         "codelldb",
         "cppdbg",
         -- "vscode-cpptools",
+        "lldb-vscode",
       },
       handlers = {
         function(config)
           require('mason-nvim-dap').default_setup(config)
         end,
-        codelldb = function(config)
-            config.adapters = {
-	            type = "executable",
-	            command = "/usr/bin/lldb",
-              name = "lldb",
-            }
-            require('mason-nvim-dap').default_setup(config) -- don't forget this!
-        end,
+        -- codelldb = function(config)
+        --     config.adapters = {
+	       --      type = "executable",
+	       --      command = "/usr/bin/lldb",
+        --       name = "lldb",
+        --     }
+        --     require('mason-nvim-dap').default_setup(config) -- don't forget this!
+        -- end,
       },
     },
   },
@@ -289,8 +290,8 @@ local plugins = {
         },
         cmake_dap_configuration = { -- debug settings for cmake
           name = "cpp",
-          type = "cppdbg",
-          -- type = "cpptools",
+          -- type = "cppdbg",
+          type = "codelldb",
           request = "launch",
           stopOnEntry = false,
           runInTerminal = true,
