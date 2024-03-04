@@ -23,6 +23,24 @@ local plugins = {
     event = "VeryLazy",
   },  
   {
+    'akinsho/flutter-tools.nvim',
+    lazy = false,
+    dependencies = {
+        'nvim-lua/plenary.nvim',
+        'stevearc/dressing.nvim', -- optional for vim.ui.select
+    },
+    config = true,
+  },
+  {
+    'nosduco/remote-sshfs.nvim',
+    dependencies = { 'nvim-telescope/telescope.nvim' },
+    event = "VeryLazy",
+    config = function()
+      require('remote-sshfs').setup({})
+      require('telescope').load_extension 'remote-sshfs'
+    end,
+  },
+  {
     'kristijanhusak/vim-dadbod-ui',
     dependencies = {
       { 'tpope/vim-dadbod', event = "VeryLazy" },
@@ -129,18 +147,18 @@ local plugins = {
     ft = { "markdown" },
     build = function() vim.fn["mkdp#util#install"]() end,
   },
-  -- {
-  --   "jackMort/ChatGPT.nvim",
-  --   event = "VeryLazy",
-  --   config = function()
-  --     require("chatgpt").setup()
-  --   end,
-  --   dependencies = {
-  --     "MunifTanjim/nui.nvim",
-  --     "nvim-lua/plenary.nvim",
-  --     "nvim-telescope/telescope.nvim",
-  --   },
-  -- },
+  {
+    "jackMort/ChatGPT.nvim",
+    event = "VeryLazy",
+    config = function()
+      require("chatgpt").setup()
+    end,
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
+    },
+  },
   {
     "nvim-neotest/neotest",
     event = "VeryLazy",

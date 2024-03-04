@@ -3,32 +3,11 @@
 local M = {}
 
 M.misc = {
-   i = {
-   --  ["jk"] = { "<ESC>", "escape insert mode" , opts = { nowait = true }},
-    ["ол"] = { "<ESC>", "escape insert mode" , opts = { nowait = true }},
-   },
   n = {
-    ["<leader>tf"] = {":vsp <CR>", "Vertical separator"},
-    ["<leader>tv"] = {":sp <CR>", "Horizontal separator"},
-    ["<leader>+"] = {":CMakeRun<CR>"},
-    ["м"] = {"v"},
-    ["М"] = {"V"},
-    ["н"] = {"y"},
-    ["ш"] = {"i"},
-    ["ф"] = {"a"},
-    ["Ф"] = {"A"},
-    ["в"] = {"d"},
-    ["вв"] = {"dd"},
-    ["г"] = {"u"},
-    ["ч"] = {"x"},
-    ["з"] = {"p"},
-  },
-  v = {
-    ["в"] = {"d"},
-    ["н"] = {"y"},
-    ["ч"] = {"x"},
-    ["з"] = {"p"},
-  },
+    ["<leader>sf"] = {":vsp <CR>", "Vertical separator"},
+    ["<leader>sv"] = {":sp <CR>", "Horizontal separator"},
+    ["<leader>+"] = {":CMakeRun<CR>", "Run CMake"},
+    },
 }
 
 M.general = {
@@ -50,13 +29,11 @@ M.general = {
     ["<leader>wq"] = {":wqa <CR>", "Exit and save all"},
     ["<leader>w"] = {":w <CR>", "Save file"},
     ["<leader>wa"] = {":wa <CR>", "Save all"},
-    ["<leader>й"] = {":q <CR>", "Exit"},
-    ["<leader>ц"] = {":w <CR>", "Save file"},
     -- switch between windows
-    ["<C-h>"] = { "<C-w>h", "Window left" },
-    ["<C-l>"] = { "<C-w>l", "Window right" },
-    ["<C-j>"] = { "<C-w>j", "Window down" },
-    ["<C-k>"] = { "<C-w>k", "Window up" },
+    ["th"] = { "<C-w>h", "Window left" },
+    ["tl"] = { "<C-w>l", "Window right" },
+    ["tj"] = { "<C-w>j", "Window down" },
+    ["tk"] = { "<C-w>k", "Window up" },
 
     -- save
     ["<C-s>"] = { "<cmd> w <CR>", "Save file" },
@@ -81,7 +58,7 @@ M.general = {
 
     -- new buffer
     ["<leader>b"] = { "<cmd> enew <CR>", "New buffer" },
-    ["<leader>ch"] = { "<cmd> NvCheatsheet <CR>", "Mapping cheatsheet" },
+    ["<leader>mn"] = { "<cmd> NvCheatsheet <CR>", "Mapping cheatsheet" },
 
     ["<leader>fm"] = {
       function()
@@ -103,8 +80,6 @@ M.general = {
   x = {
     ["j"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', "Move down", opts = { expr = true } },
     ["k"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', "Move up", opts = { expr = true } },
-    ["о"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', "Move down", opts = { expr = true } },
-    ["л"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', "Move up", opts = { expr = true } },
     -- Don't copy the replaced text after pasting in visual mode
     -- https://vim.fandom.com/wiki/Replace_a_word_with_yanked_text#Alternative_mapping_for_paste
     ["p"] = { 'p:let @+=@0<CR>:let @"=@0<CR>', "Dont copy replaced text", opts = { silent = true } },
@@ -287,7 +262,6 @@ M.nvimtree = {
   n = {
     -- toggle
     ["<leader>e"] = { "<cmd> NvimTreeToggle <CR>", "Toggle nvimtree" },
-    ["<leader>у"] = { "<cmd> NvimTreeToggle <CR>", "Toggle nvimtree" },
     -- focus
     ["<leader>ew"] = { "<cmd> NvimTreeFocus <CR>", "Focus nvimtree" },
   },
@@ -305,10 +279,11 @@ M.telescope = {
     ["<leader>fh"] = { "<cmd> Telescope help_tags <CR>", "Help page" },
     ["<leader>fo"] = { "<cmd> Telescope oldfiles <CR>", "Find oldfiles" },
     ["<leader>fz"] = { "<cmd> Telescope current_buffer_fuzzy_find <CR>", "Find in current buffer" },
+    ["<leader><tab>"] = { "<cmd>lua require('telescope.builtin').commands()<CR>", "Telescope commands"},
 
     -- git
-    ["<leader>cm"] = { "<cmd> Telescope git_commits <CR>", "Git commits" },
-    ["<leader>gt"] = { "<cmd> Telescope git_status <CR>", "Git status" },
+    ["<leader>fc"] = { "<cmd> Telescope git_commits <CR>", "Git commits" },
+    ["<leader>fg"] = { "<cmd> Telescope git_status <CR>", "Git status" },
 
     -- pick a hidden term
     ["<leader>pt"] = { "<cmd> Telescope terms <CR>", "Pick hidden term" },
@@ -325,21 +300,21 @@ M.nvterm = {
 
   t = {
     -- toggle in terminal mode
-    ["<C-`>"] = {
+    ["<leader>tf"] = {
       function()
         require("nvterm.terminal").toggle "float"
       end,
       "Toggle floating term",
     },
 
-    ["<A-h>"] = {
+    ["<leader>h"] = {
       function()
         require("nvterm.terminal").toggle "horizontal"
       end,
       "Toggle horizontal term",
     },
 
-    ["<A-v>"] = {
+    ["<leader>v"] = {
       function()
         require("nvterm.terminal").toggle "vertical"
       end,
@@ -349,21 +324,21 @@ M.nvterm = {
 
   n = {
     -- toggle in normal mode
-    ["<A-i>"] = {
+    ["<leader>tf"] = {
       function()
         require("nvterm.terminal").toggle "float"
       end,
       "Toggle floating term",
     },
 
-    ["<A-h>"] = {
+    ["<leader>h"] = {
       function()
         require("nvterm.terminal").toggle "horizontal"
       end,
       "Toggle horizontal term",
     },
 
-    ["<A-v>"] = {
+    ["<leader>v"] = {
       function()
         require("nvterm.terminal").toggle "vertical"
       end,
@@ -371,14 +346,14 @@ M.nvterm = {
     },
 
     -- new
-    ["<leader>h"] = {
+    ["<leader>hn"] = {
       function()
         require("nvterm.terminal").new "horizontal"
       end,
       "New horizontal term",
     },
 
-    ["<leader>v"] = {
+    ["<leader>vn"] = {
       function()
         require("nvterm.terminal").new "vertical"
       end,
