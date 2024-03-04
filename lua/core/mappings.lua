@@ -4,10 +4,10 @@ local M = {}
 
 M.misc = {
   n = {
-    ["<leader>sf"] = {":vsp <CR>", "Vertical separator"},
-    ["<leader>sv"] = {":sp <CR>", "Horizontal separator"},
-    ["<leader>+"] = {":CMakeRun<CR>", "Run CMake"},
-    },
+    ["<leader>sf"] = { ":vsp <CR>", "Vertical separator" },
+    ["<leader>sv"] = { ":sp <CR>", "Horizontal separator" },
+    ["<leader>+"] = { ":CMakeRun<CR>", "Run CMake" },
+  },
 }
 
 M.general = {
@@ -25,10 +25,10 @@ M.general = {
 
   n = {
     ["<Esc>"] = { ":noh <CR>", "Clear highlights" },
-    ["<leader>q"] = {":q <CR>", "Exit"},
-    ["<leader>wq"] = {":wqa <CR>", "Exit and save all"},
-    ["<leader>w"] = {":w <CR>", "Save file"},
-    ["<leader>wa"] = {":wa <CR>", "Save all"},
+    ["<leader>q"] = { ":q <CR>", "Exit" },
+    ["<leader>wq"] = { ":wqa <CR>", "Exit and save all" },
+    ["<leader>w"] = { ":w <CR>", "Save file" },
+    ["<leader>wa"] = { ":wa <CR>", "Save all" },
     -- switch between windows
     ["th"] = { "<C-w>h", "Window left" },
     ["tl"] = { "<C-w>l", "Window right" },
@@ -279,7 +279,7 @@ M.telescope = {
     ["<leader>fh"] = { "<cmd> Telescope help_tags <CR>", "Help page" },
     ["<leader>fo"] = { "<cmd> Telescope oldfiles <CR>", "Find oldfiles" },
     ["<leader>fz"] = { "<cmd> Telescope current_buffer_fuzzy_find <CR>", "Find in current buffer" },
-    ["<leader><tab>"] = { "<cmd>lua require('telescope.builtin').commands()<CR>", "Telescope commands"},
+    ["<leader><tab>"] = { "<cmd>lua require('telescope.builtin').commands()<CR>", "Telescope commands" },
 
     -- git
     ["<leader>fc"] = { "<cmd> Telescope git_commits <CR>", "Git commits" },
