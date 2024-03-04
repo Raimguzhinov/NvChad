@@ -48,6 +48,11 @@ local plugins = {
         event = "VeryLazy",
     },
     {
+        "lukas-reineke/indent-blankline.nvim",
+        main = "ibl",
+        opts = {},
+    },
+    {
         "akinsho/flutter-tools.nvim",
         lazy = false,
         dependencies = {
@@ -120,22 +125,22 @@ local plugins = {
             require("core.utils").load_mappings "dap_go"
         end,
     },
-    {
-        "kelly-lin/ranger.nvim",
-        config = function()
-            require("ranger-nvim").setup {
-                enable_cmds = true,
-                replace_netrw = false,
-                ui = {
-                    border = "none",
-                    height = 1,
-                    width = 1,
-                    x = 0.5,
-                    y = 0.5,
-                },
-            }
-        end,
-    },
+    -- {
+    --     "kelly-lin/ranger.nvim",
+    --     config = function()
+    --         require("ranger-nvim").setup {
+    --             enable_cmds = true,
+    --             replace_netrw = false,
+    --             ui = {
+    --                 border = "none",
+    --                 height = 1,
+    --                 width = 1,
+    --                 x = 0.5,
+    --                 y = 0.5,
+    --             },
+    --         }
+    --     end,
+    -- },
     {
         "christoomey/vim-tmux-navigator",
         lazy = false,
@@ -198,8 +203,45 @@ local plugins = {
             }
         end,
     },
+    { "tpope/vim-sleuth" },
+    { "onsails/lspkind.nvim" },
+    { "preservim/vim-pencil" },
+    { "folke/zen-mode.nvim" },
+    { "David-Kunz/gen.nvim" },
+    { "tpope/vim-dadbod" },
+    { "tpope/vim-obsession" },
+    { "ThePrimeagen/git-worktree.nvim" },
+    { "numToStr/Comment.nvim" },
     {
-        "tpope/vim-sleuth",
+        "sourcegraph/sg.nvim",
+        dependencies = { "nvim-lua/plenary.nvim" },
+    },
+    {
+        "epwalsh/obsidian.nvim",
+        version = "*", -- recommended, use latest release instead of latest commit
+        lazy = true,
+        ft = "markdown",
+
+        keys = {
+            { "<leader>on", "<cmd>ObsidianNew<cr>", desc = "New Obsidian note", mode = "n" },
+            { "<leader>oo", "<cmd>ObsidianSearch<cr>", desc = "Search Obsidian notes", mode = "n" },
+            { "<leader>os", "<cmd>ObsidianQuickSwitch<cr>", desc = "Quick Switch", mode = "n" },
+            { "<leader>ob", "<cmd>ObsidianBacklinks<cr>", desc = "Show location list of backlinks", mode = "n" },
+            { "<leader>ot", "<cmd>ObsidianTemplate<cr>", desc = "Follow link under cursor", mode = "n" },
+        },
+        config = function()
+            require "custom.configs.obsidian"
+        end,
+        -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
+        -- event = {
+        --   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
+        --   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
+        --   "BufReadPre path/to/my-vault/**.md",
+        --   "BufNewFile path/to/my-vault/**.md",
+        -- },
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+        },
     },
     {
         "max397574/better-escape.nvim",
@@ -236,6 +278,9 @@ local plugins = {
     {
         "folke/trouble.nvim",
         dependencies = { "nvim-tree/nvim-web-devicons" },
+        config = function()
+            require("trouble").setup()
+        end,
     },
     {
         "folke/todo-comments.nvim",

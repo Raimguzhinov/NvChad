@@ -243,6 +243,7 @@ local default_plugins = {
             telescope.setup(opts)
 
             -- load extensions
+            telescope.load_extension "git_worktree"
             for _, ext in ipairs(opts.extensions_list) do
                 telescope.load_extension(ext)
             end

@@ -3,20 +3,19 @@ local M = {}
 M.general = {
 
     n = {
-        ["<C-h>"] = { "<cmd> TmuxNavigateLeft <CR>", "window left" },
-        ["<C-j>"] = { "<cmd> TmuxNavigateDown <CR>", "window down" },
-        ["<C-k>"] = { "<cmd> TmuxNavigateUp <CR>", "window up" },
-        ["<C-l>"] = { "<cmd> TmuxNavigateRight <CR>", "window right" },
-        ["<leader>ch"] = { '<cmd>lua require("cpptool").create_file()<CR>' },
-        ["<leader>cf"] = { '<cmd>lua require("cpptool").create_func_def()<CR>' },
-        ["<leader>o"] = { '<cmd>lua require("ranger-nvim").open(true)<CR>' },
+        ["<C-h>"] = { "<cmd> TmuxNavigateLeft <CR>", "Tmux left" },
+        ["<C-j>"] = { "<cmd> TmuxNavigateDown <CR>", "Tmux down" },
+        ["<C-k>"] = { "<cmd> TmuxNavigateUp <CR>", "Tmux up" },
+        ["<C-l>"] = { "<cmd> TmuxNavigateRight <CR>", "Tmux right" },
+        ["<leader>ch"] = { '<cmd>lua require("cpptool").create_file()<CR>', "New C++ header" },
+        ["<leader>cf"] = { '<cmd>lua require("cpptool").create_func_def()<CR>', "New C++ function" },
         ["<leader>cg"] = {
             ":ChatGPTCompleteCode<CR>",
             "Step over",
         },
         ["<leader>gl"] = {
             ":Flog<CR>",
-            "Git Log",
+            "Git Flog",
         },
         ["<leader>gf"] = {
             ":DiffviewFileHistory<CR>",
@@ -35,11 +34,11 @@ M.general = {
         ["v"] = { "V" },
         ["<leader><up>"] = {
             "<cmd>lua require('cpptool').move_lines(\"up\")<CR>",
-            "cpptool-up-lines",
+            "Cpptool-up-lines",
         },
         ["<leader><down>"] = {
             "<cmd>lua require('cpptool').move_lines(\"down\")<CR>",
-            "cpptool-down-lines",
+            "Cpptool-down-lines",
         },
     },
 }

@@ -10,9 +10,9 @@ M.ui = {
   hl_add = {},
   hl_override = {},
   changed_themes = {},
-  theme_toggle = { "onedark", "one_light" },
-  theme = "onedark", -- default theme
-  transparency = false,
+  theme_toggle = { "oxocarbon", "onedark" },
+  theme = "oxocarbon", -- default theme
+  transparency = true,
   lsp_semantic_tokens = true, -- needs nvim v0.9, just adds highlight groups for lsp semantic tokens
 
   -- https://github.com/NvChad/base46/tree/v2.0/lua/base46/extended_integrations
