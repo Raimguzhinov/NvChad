@@ -31,7 +31,7 @@ M.lazy = function(install_path)
   -- install plugins
   require "plugins"
 
-  -- mason packages & show post_boostrap screen
+  -- mason packages & show post_bootstrap screen
   require "nvchad.post_install"()
 end
 
@@ -40,9 +40,8 @@ M.gen_chadrc_template = function()
     local path = vim.fn.stdpath "config" .. "/lua/custom/"
     local input = "N"
 
-    if next(vim.api.nvim_list_uis()) then
-      input = vim.fn.input "Do you want to install example custom config? (y/N) : "
-    end
+  if fn.isdirectory(path) ~= 1 then
+    local input = vim.env.NVCHAD_EXAMPLE_CONFIG or fn.input "Do you want to install example custom config? (y/N): "
 
     -- clone example_config repo
     if input == "y" then

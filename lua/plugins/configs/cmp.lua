@@ -46,7 +46,9 @@ end
 
 local options = {
     completion = {
-        completeopt = "menu,menuone",
+        side_padding = (cmp_style ~= "atom" and cmp_style ~= "atom_colored") and 1 or 0,
+        winhighlight = "Normal:CmpPmenu,CursorLine:CmpSel,Search:None",
+        scrollbar = false,
     },
 
     window = {
