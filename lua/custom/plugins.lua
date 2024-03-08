@@ -125,6 +125,17 @@ local plugins = {
             require("core.utils").load_mappings "dap_go"
         end,
     },
+    {
+        "DreamMaoMao/yazi.nvim",
+        dependencies = {
+            "nvim-telescope/telescope.nvim",
+            "nvim-lua/plenary.nvim",
+        },
+
+        keys = {
+            { "<leader>op", "<cmd>Yazi<CR>", desc = "Toggle Yazi" },
+        },
+    },
     -- {
     --     "kelly-lin/ranger.nvim",
     --     config = function()
