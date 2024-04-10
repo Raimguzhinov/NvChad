@@ -34,12 +34,22 @@ local plugins = {
                     telescope = require("telescope.themes").get_dropdown { hide_preview = false },
                 },
                 -- These two configs can also be passed down to the goto-preview definition and implementation calls for one off "peak" functionality.
-                focus_on_open = true, -- Focus the floating window when opening it.
-                dismiss_on_move = false, -- Dismiss the floating window when moving the cursor.
-                force_close = true, -- passed into vim.api.nvim_win_close's second argument. See :h nvim_win_close
-                bufhidden = "wipe", -- the bufhidden option to set on the floating window. See :h bufhidden
-                stack_floating_preview_windows = true, -- Whether to nest floating windows
+                focus_on_open = true,                                        -- Focus the floating window when opening it.
+                dismiss_on_move = false,                                     -- Dismiss the floating window when moving the cursor.
+                force_close = true,                                          -- passed into vim.api.nvim_win_close's second argument. See :h nvim_win_close
+                bufhidden = "wipe",                                          -- the bufhidden option to set on the floating window. See :h bufhidden
+                stack_floating_preview_windows = true,                       -- Whether to nest floating windows
                 preview_window_title = { enable = true, position = "left" }, -- Whether
+            }
+        end,
+    },
+    { "nvim-neotest/nvim-nio" },
+    {
+        "gen740/SmoothCursor.nvim",
+        event = "VeryLazy",
+        config = function()
+            require("smoothcursor").setup {
+                type = "matrix",
             }
         end,
     },
@@ -73,7 +83,7 @@ local plugins = {
     {
         "kristijanhusak/vim-dadbod-ui",
         dependencies = {
-            { "tpope/vim-dadbod", event = "VeryLazy" },
+            { "tpope/vim-dadbod",                     event = "VeryLazy" },
             { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" }, lazy = true },
         },
         cmd = {
@@ -234,11 +244,11 @@ local plugins = {
         ft = "markdown",
 
         keys = {
-            { "<leader>on", "<cmd>ObsidianNew<cr>", desc = "New Obsidian note", mode = "n" },
-            { "<leader>oo", "<cmd>ObsidianSearch<cr>", desc = "Search Obsidian notes", mode = "n" },
-            { "<leader>os", "<cmd>ObsidianQuickSwitch<cr>", desc = "Quick Switch", mode = "n" },
-            { "<leader>ob", "<cmd>ObsidianBacklinks<cr>", desc = "Show location list of backlinks", mode = "n" },
-            { "<leader>ot", "<cmd>ObsidianTemplate<cr>", desc = "Follow link under cursor", mode = "n" },
+            { "<leader>on", "<cmd>ObsidianNew<cr>",         desc = "New Obsidian note",               mode = "n" },
+            { "<leader>oo", "<cmd>ObsidianSearch<cr>",      desc = "Search Obsidian notes",           mode = "n" },
+            { "<leader>os", "<cmd>ObsidianQuickSwitch<cr>", desc = "Quick Switch",                    mode = "n" },
+            { "<leader>ob", "<cmd>ObsidianBacklinks<cr>",   desc = "Show location list of backlinks", mode = "n" },
+            { "<leader>ot", "<cmd>ObsidianTemplate<cr>",    desc = "Follow link under cursor",        mode = "n" },
         },
         config = function()
             require "custom.configs.obsidian"
@@ -259,10 +269,10 @@ local plugins = {
         event = "InsertEnter",
         config = function()
             require("better_escape").setup {
-                mapping = { "jk", "jj" }, -- a table with mappings to use
+                mapping = { "jk", "jj" },   -- a table with mappings to use
                 timeout = vim.o.timeoutlen, -- the time in which the keys must be hit in ms. Use option timeoutlen by default
-                clear_empty_lines = false, -- clear line after escaping if there is only whitespace
-                keys = "<Esc>", -- keys used for escaping, if it is a function will use the result everytime
+                clear_empty_lines = false,  -- clear line after escaping if there is only whitespace
+                keys = "<Esc>",             -- keys used for escaping, if it is a function will use the result everytime
                 -- example(recommended)
                 -- keys = function()
                 --   return vim.api.nvim_win_get_cursor(0)[2] > 1 and '<esc>l' or '<esc>'
@@ -271,9 +281,13 @@ local plugins = {
         end,
     },
     { "tpope/vim-fugitive" },
-    { "rbong/vim-flog", dependencies = {
-        "tpope/vim-fugitive",
-    }, lazy = false },
+    {
+        "rbong/vim-flog",
+        dependencies = {
+            "tpope/vim-fugitive",
+        },
+        lazy = false,
+    },
     { "sindrets/diffview.nvim", lazy = false },
     {
         "ggandor/leap.nvim",
@@ -399,20 +413,20 @@ local plugins = {
         "Civitasv/cmake-tools.nvim",
         init = function()
             require("cmake-tools").setup {
-                cmake_command = "cmake", -- this is used to specify cmake command path
-                cmake_regenerate_on_save = true, -- auto generate when save CMakeLists.txt
+                cmake_command = "cmake",                                          -- this is used to specify cmake command path
+                cmake_regenerate_on_save = true,                                  -- auto generate when save CMakeLists.txt
                 cmake_generate_options = { "-DCMAKE_EXPORT_COMPILE_COMMANDS=1" }, -- this will be passed when invoke `CMakeGenerate`
-                cmake_build_options = {}, -- this will be passed when invoke `CMakeBuild`
-                cmake_build_directory = "build", -- this is used to specify generate directory for cmake
-                cmake_build_directory_prefix = "cmake_build_", -- when cmake_build_directory is set to "", this option will be activated
-                cmake_soft_link_compile_commands = true, -- this will automatically make a soft link from compile commands file to project root dir
-                cmake_compile_commands_from_lsp = false, -- this will automatically set compile commands file location using lsp, to use it, please set `cmake_soft_link_compile_commands` to false
-                cmake_kits_path = nil, -- this is used to specify global cmake kits path, see CMakeKits for detailed usage
+                cmake_build_options = {},                                         -- this will be passed when invoke `CMakeBuild`
+                cmake_build_directory = "build",                                  -- this is used to specify generate directory for cmake
+                cmake_build_directory_prefix = "cmake_build_",                    -- when cmake_build_directory is set to "", this option will be activated
+                cmake_soft_link_compile_commands = true,                          -- this will automatically make a soft link from compile commands file to project root dir
+                cmake_compile_commands_from_lsp = false,                          -- this will automatically set compile commands file location using lsp, to use it, please set `cmake_soft_link_compile_commands` to false
+                cmake_kits_path = nil,                                            -- this is used to specify global cmake kits path, see CMakeKits for detailed usage
                 cmake_variants_message = {
-                    short = { show = true }, -- whether to show short message
-                    long = { show = true, max_length = 40 }, -- whether to show long message
+                    short = { show = true },                                      -- whether to show short message
+                    long = { show = true, max_length = 40 },                      -- whether to show long message
                 },
-                cmake_dap_configuration = { -- debug settings for cmake
+                cmake_dap_configuration = {                                       -- debug settings for cmake
                     name = "cpp",
                     -- type = "cppdbg",
                     type = "codelldb",
@@ -421,20 +435,20 @@ local plugins = {
                     runInTerminal = true,
                     console = "integratedTerminal",
                 },
-                cmake_executor = { -- executor to use
-                    name = "quickfix", -- name of the executor
-                    opts = {}, -- the options the executor will get, possible values depend on the executor type. See `default_opts` for possible values.
-                    default_opts = { -- a list of default and possible values for executors
+                cmake_executor = {                   -- executor to use
+                    name = "quickfix",               -- name of the executor
+                    opts = {},                       -- the options the executor will get, possible values depend on the executor type. See `default_opts` for possible values.
+                    default_opts = {                 -- a list of default and possible values for executors
                         quickfix = {
-                            show = "always", -- "always", "only_on_error"
+                            show = "always",         -- "always", "only_on_error"
                             position = "belowright", -- "bottom", "top"
                             size = 10,
                         },
                         overseer = {
-                            new_task_opts = {}, -- options to pass into the `overseer.new_task` command
+                            new_task_opts = {},               -- options to pass into the `overseer.new_task` command
                             on_new_task = function(task) end, -- a function that gets overseer.Task when it is created, before calling `task:start`
                         },
-                        terminal = {}, -- terminal executor uses the values in cmake_terminal
+                        terminal = {},                        -- terminal executor uses the values in cmake_terminal
                     },
                 },
                 cmake_terminal = {
@@ -442,19 +456,19 @@ local plugins = {
                     opts = {
                         name = "Main Terminal",
                         prefix_name = "[CMakeTools]: ", -- This must be included and must be unique, otherwise the terminals will not work. Do not use a simple spacebar " ", or any generic name
-                        split_direction = "vertical", -- "horizontal", "vertical"
+                        split_direction = "vertical",   -- "horizontal", "vertical"
                         split_size = 46,
 
                         -- Window handling
-                        single_terminal_per_instance = true, -- Single viewport, multiple windows
-                        single_terminal_per_tab = true, -- Single viewport per tab
+                        single_terminal_per_instance = true,  -- Single viewport, multiple windows
+                        single_terminal_per_tab = true,       -- Single viewport per tab
                         keep_terminal_static_location = true, -- Static location of the viewport if avialable
 
                         -- Running Tasks
                         start_insert_in_launch_task = true, -- If you want to enter terminal with :startinsert upon using :CMakeRun
                         start_insert_in_other_tasks = true, -- If you want to enter terminal with :startinsert upon launching all other cmake tasks in the terminal. Generally set as false
-                        focus_on_main_terminal = true, -- Focus on cmake terminal when cmake task is launched. Only used if executor is terminal.
-                        focus_on_launch_terminal = true, -- Focus on cmake launch terminal when executable target in launched.
+                        focus_on_main_terminal = true,      -- Focus on cmake terminal when cmake task is launched. Only used if executor is terminal.
+                        focus_on_launch_terminal = true,    -- Focus on cmake launch terminal when executable target in launched.
                     },
                 },
                 cmake_notifications = {
@@ -658,7 +672,7 @@ local plugins = {
                             function()
                                 return icons.ui.Line
                             end,
-                            color = { fg = colors.blue }, -- Sets highlighting of component
+                            color = { fg = colors.blue },      -- Sets highlighting of component
                             padding = { left = 0, right = 1 }, -- We don't need space before this
                         },
                     },
@@ -706,7 +720,7 @@ local plugins = {
                 function()
                     return icons.ui.Line
                 end,
-                color = { fg = colors.blue }, -- Sets highlighting of component
+                color = { fg = colors.blue },      -- Sets highlighting of component
                 padding = { left = 0, right = 1 }, -- We don't need space before this
             }
             ins_left {
@@ -890,7 +904,7 @@ local plugins = {
             --   end
             -- }
             ins_right {
-                "o:encoding", -- option component same as &encoding in viml
+                "o:encoding",       -- option component same as &encoding in viml
                 fmt = string.upper, -- I'm not sure why it's upper case either ;)
                 cond = conditions.hide_in_width,
                 icon = icons.ui.NewFile,
