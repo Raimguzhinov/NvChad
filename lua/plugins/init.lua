@@ -7,6 +7,13 @@ return {
         end,
     },
     {
+        'declancm/cinnamon.nvim',
+        event = "VeryLazy",
+        config = function()
+            require('cinnamon').setup()
+        end,
+    },
+    {
         "rcarriga/nvim-dap-ui",
         event = "VeryLazy",
         dependencies = "mfussenegger/nvim-dap",
