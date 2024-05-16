@@ -4,6 +4,9 @@ require "nvchad.mappings"
 
 local map = vim.keymap.set
 
+-- cross-platform pasting
+vim.cmd("inoremap <C-v> <C-r>+")
+
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
 map("n", "vv", "V")
