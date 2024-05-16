@@ -6,6 +6,14 @@ local map = vim.keymap.set
 
 -- cross-platform pasting
 vim.cmd("inoremap <C-v> <C-r>+")
+vim.cmd(
+    [[
+function OpenMarkdownPreview (url)
+  execute "silent ! firefox --private-window " . a:url
+endfunction
+]]
+)
+vim.g.mkdp_browserfunc = 'OpenMarkdownPreview'
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
