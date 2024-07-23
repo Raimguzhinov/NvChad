@@ -12,3 +12,6 @@ o.wrap = false           -- sets vim.opt.wrap
 o.shiftwidth = 4
 o.tabstop = 4
 o.conceallevel = 2
+o.clipboard = "unnamedplus"
+
+if vim.fn.has("termguicolors") == 1 then vim.o.termguicolors = true end

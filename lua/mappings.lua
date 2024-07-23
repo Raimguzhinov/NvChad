@@ -15,6 +15,9 @@ endfunction
 )
 vim.g.mkdp_browserfunc = 'OpenMarkdownPreview'
 
+local api = require("nvim-tree.api")
+api.tree.toggle({ focus = false })
+
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
 map("n", "vv", "V")
