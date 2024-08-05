@@ -6,7 +6,15 @@ local util = require "lspconfig/util"
 local breadcrumb = require "breadcrumb"
 
 local lspconfig = require "lspconfig"
-local servers = { "html", "cssls" }
+local servers = { "html", "cssls", "tsserver", "clangd", "gopls", "gradle_ls" }
+
+local function organize_imports()
+    local params = {
+        command = "_typescript.organizeImports",
+        arguments = { vim.api.nvim_buf_get_name(0) },
+    }
+    vim.lsp.buf.execute_command(params)
+end
 
 -- lsps with default config
 for _, lsp in ipairs(servers) do
@@ -14,15 +22,14 @@ for _, lsp in ipairs(servers) do
         on_attach = on_attach,
         on_init = on_init,
         capabilities = capabilities,
+        commands = {
+            OrganizeImports = {
+                organize_imports,
+                description = "Organize Imports",
+            },
+        },
     }
 end
-
--- typescript
-lspconfig.tsserver.setup {
-    on_attach = on_attach,
-    on_init = on_init,
-    capabilities = capabilities,
-}
 
 lspconfig.gopls.setup {
     on_attach = function(client, bufnr)
@@ -64,4 +71,16 @@ lspconfig.clangd.setup {
             cmake.clangd_on_new_config(new_config)
         end
     end,
+}
+
+lspconfig.prismals.setup {}
+
+lspconfig.volar.setup {
+    on_attach = on_attach,
+    filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+    init_options = {
+        vue = {
+            hybridMode = false,
+        },
+    },
 }

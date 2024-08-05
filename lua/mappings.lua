@@ -36,3 +36,4 @@ map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 
 map("n", "<leader>i", ":GoIfErr<CR>", { desc = "GoIfErr" })
 map("n", "<leader>+", ":CMakeRun<CR>", { desc = "CMakeRun" })
+map("n", "<leader>k", ":GoDoc<CR>", { desc = "GoDoc" })
