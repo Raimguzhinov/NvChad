@@ -6,7 +6,7 @@ local util = require "lspconfig/util"
 local breadcrumb = require "breadcrumb"
 
 local lspconfig = require "lspconfig"
-local servers = { "html", "cssls", "tsserver", "clangd", "gopls", "gradle_ls" }
+local servers = { "html", "cssls", "tsserver", "gradle_ls", "bufls" }
 
 local function organize_imports()
     local params = {
@@ -54,6 +54,12 @@ lspconfig.gopls.setup {
             staticcheck = true,
         },
     },
+    commands = {
+        OrganizeImports = {
+            organize_imports,
+            description = "Organize Imports",
+        },
+    },
 }
 
 lspconfig.clangd.setup {
@@ -65,12 +71,21 @@ lspconfig.clangd.setup {
         on_attach(client, bufnr)
     end,
     capabilities = capabilities,
+    cmd = { "clangd" },
+    filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "hpp", "h" },
+    root_dir = util.root_pattern('.clangd', '.clang-tidy', '.clang-format', 'compile_commands.json', 'compile_flags.txt', 'configure.ac', '.git'),
     on_new_config = function(new_config, new_cwd)
         local status, cmake = pcall(require, "cmake-tools")
         if status then
             cmake.clangd_on_new_config(new_config)
         end
     end,
+    commands = {
+        OrganizeImports = {
+            organize_imports,
+            description = "Organize Imports",
+        },
+    },
 }
 
 lspconfig.prismals.setup {}

@@ -5,7 +5,7 @@
 local M = {}
 
 M.ui = {
-    theme = "kanagawa",
+    theme = "oxocarbon",
     transparency = true,
     statusline = {
         theme = "vscode_colored",

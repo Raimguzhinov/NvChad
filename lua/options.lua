@@ -19,5 +19,6 @@ o.shiftwidth = 4
 o.tabstop = 4
 o.conceallevel = 2
 o.clipboard = "unnamedplus"
+o.colorcolumn = "140"
 
 if vim.fn.has("termguicolors") == 1 then vim.o.termguicolors = true end

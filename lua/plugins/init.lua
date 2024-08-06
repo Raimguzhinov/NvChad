@@ -7,6 +7,48 @@ return {
         end,
     },
     {
+        "hrsh7th/nvim-cmp",
+        event = "InsertEnter",
+        dependencies = {
+            {
+                -- snippet plugin
+                "L3MON4D3/LuaSnip",
+                dependencies = "rafamadriz/friendly-snippets",
+                opts = { history = true, updateevents = "TextChanged,TextChangedI" },
+                config = function(_, opts)
+                    require("luasnip").config.set_config(opts)
+                    require "nvchad.configs.luasnip"
+                end,
+            },
+            -- autopairing of (){}[] etc
+            {
+                "windwp/nvim-autopairs",
+                opts = {
+                    fast_wrap = {},
+                    disable_filetype = { "TelescopePrompt", "vim" },
+                },
+                config = function(_, opts)
+                    require("nvim-autopairs").setup(opts)
+
+                    -- setup cmp for autopairs
+                    local cmp_autopairs = require "nvim-autopairs.completion.cmp"
+                    require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
+                end,
+            },
+            -- cmp sources plugins
+            {
+                "saadparwaiz1/cmp_luasnip",
+                "hrsh7th/cmp-nvim-lua",
+                "hrsh7th/cmp-nvim-lsp",
+                "hrsh7th/cmp-buffer",
+                "hrsh7th/cmp-path",
+            },
+        },
+        opts = function()
+            return require "configs.cmp"
+        end,
+    },
+    {
         "nvim-tree/nvim-tree.lua",
         opts = {
             filters = { dotfiles = true },
@@ -50,6 +92,14 @@ return {
                 show_on_dirs = true,
             },
         },
+    },
+    {
+        "mfussenegger/nvim-lint",
+        lazy = true,
+        event = { "BufReadPre", "BufNewFile" }, -- to disable, comment this out
+        config = function()
+            require "configs.lint"
+        end,
     },
     {
         'declancm/cinnamon.nvim',
@@ -103,6 +153,18 @@ return {
         end,
     },
     { "nvim-neotest/nvim-nio" },
+    -- {
+    --     "nvim-neotest/neotest",
+    --     event = "VeryLazy",
+    --     config = function()
+    --         require("neotest").setup()
+    --     end,
+    --     dependencies = {
+    --         "nvim-lua/plenary.nvim",
+    --         "nvim-treesitter/nvim-treesitter",
+    --         "antoinemadec/FixCursorHold.nvim",
+    --     },
+    -- },
     {
         "gen740/SmoothCursor.nvim",
         event = "VeryLazy",
@@ -180,17 +242,17 @@ return {
         init = function()
             -- Your DBUI configuration
             vim.g.db_ui_use_nerd_fonts = 1
+            vim.g.db_ui_win_position = 'right'
         end,
     },
-    --   {
-    --     "leoluz/nvim-dap-go",
-    --     ft = "go",
-    --     dependencies = "mfussenegger/nvim-dap",
-    --     config = function(_, opts)
-    --         require("dap-go").setup(opts)
-    --         require("mappings").load_mappings "dap_go"
-    --     end,
-    -- },
+    {
+        "leoluz/nvim-dap-go",
+        ft = "go",
+        dependencies = "mfussenegger/nvim-dap",
+        config = function(_, opts)
+            require("dap-go").setup(opts)
+        end,
+    },
     {
         "DreamMaoMao/yazi.nvim",
         dependencies = {
@@ -278,15 +340,15 @@ return {
         ft = { "go", "gomod" },
         build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
     },
-
-    -- {
-    --     "mfussenegger/nvim-dap",
-    --     config = function()
-    --         require("mappings").load_mappings "dap"
-    --     end,
-    -- },
-
-    -- These are some examples, uncomment them if you want to see them work!
+    {
+        "mfussenegger/nvim-dap",
+        config = function()
+            local ok, _ = pcall(require, "dap")
+            if not ok then
+                return
+            end
+        end,
+    },
     {
         "neovim/nvim-lspconfig",
         config = function()
@@ -810,5 +872,34 @@ return {
             --   If not available, we use `mini` as the fallback
             "rcarriga/nvim-notify",
         },
+    },
+    {
+        'javiorfo/nvim-soil',
+        -- Optional for puml syntax highlighting:
+        dependencies = { 'javiorfo/nvim-nyctophilia' },
+
+        lazy = true,
+        ft = "plantuml",
+        opts = {
+            -- If you want to change default configurations
+
+            -- If you want to use Plant UML jar version instead of the install version
+            puml_jar = "~/.config/nvim/plantuml-1.2024.6.jar",
+
+            -- If you want to customize the image showed when running this plugin
+            image = {
+                darkmode = false, -- Enable or disable darkmode
+                format = "png",   -- Choose between png or svg
+
+                -- This is a default implementation of using nsxiv to open the resultant image
+                -- Edit the string to use your preferred app to open the image (as if it were a command line)
+                -- Some examples:
+                -- return "feh " .. img
+                -- return "xdg-open " .. img
+                execute_to_open = function(img)
+                    return "swayimg " .. img
+                end
+            }
+        }
     },
 }
