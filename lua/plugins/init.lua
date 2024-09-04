@@ -7,6 +7,15 @@ return {
         end,
     },
     {
+        'dense-analysis/ale',
+        config = function()
+            local g = vim.g
+            g.ale_linters = {
+                go = { 'golangci-lint' }
+            }
+        end
+    },
+    {
         "hrsh7th/nvim-cmp",
         event = "InsertEnter",
         dependencies = {
@@ -51,7 +60,7 @@ return {
     {
         "nvim-tree/nvim-tree.lua",
         opts = {
-            filters = { dotfiles = true },
+            -- filters = { dotfiles = true },
             disable_netrw = true,
             hijack_cursor = true,
             sync_root_with_cwd = true,
@@ -334,7 +343,24 @@ return {
             "nvim-treesitter/nvim-treesitter",
         },
         config = function()
-            require("go").setup()
+            -- local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+            -- local breadcrumb = require "breadcrumb"
+            -- local on_attach = require("nvchad.configs.lspconfig").on_attach
+            require('go').setup({
+                lsp_cfg = false
+                -- {
+                --     on_attach = function(client, bufnr)
+                --         if client.server_capabilities.documentSymbolProvider then
+                --             breadcrumb.attach(client, bufnr)
+                --         end
+                --         client.server_capabilities.signatureHelpProvider = false
+                --         -- on_attach(client, bufnr)
+                --     end,
+                --     capabilities = capabilities,
+                -- },
+            })
+            local cfg = require 'go.lsp'.config()
+            require('lspconfig').gopls.setup(cfg)
         end,
         event = { "CmdlineEnter" },
         ft = { "go", "gomod" },

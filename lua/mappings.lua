@@ -58,9 +58,11 @@ map("n", "<leader>qt", "<cmd>TodoTrouble<CR>", { desc = "Open Todo Trouble" })
 -- GoLang
 map("n", "<leader>i", ":GoIfErr<CR>", { desc = "GoIfErr" })
 map("n", "<leader>+", ":GoRun<CR>", { desc = "GoRun" })
+map("n", "<leader>+t", ":GoTest -F<CR>", { desc = "GoTest" })
 map("n", "<leader>++", ":CMakeRun<CR>", { desc = "CMakeRun" })
 map("n", "<leader>k", ":GoDoc<CR>", { desc = "GoDoc" })
 map("n", "<leader>l", ":GoLint<CR>", { desc = "GoLint" })
+map("n", "<leader>ra", ":GoRename<CR>", { desc = "GoRename" })
 
 -- Debug
 map("n", "<leader>du", function()
